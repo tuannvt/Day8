@@ -18,6 +18,7 @@ public class BookEntity {
     @JoinColumn(name = "categoryId")
     private CategoryEntity category;
     @OneToOne(cascade = {CascadeType.ALL})
+    @PrimaryKeyJoinColumn
     private BookDetailEntity bookDetails;
     public BookEntity(){
 
@@ -55,20 +56,24 @@ public class BookEntity {
         this.category = category;
     }
 
-    public BookDetailEntity getBookDetail() {
+    public BookDetailEntity getBookDetails() {
         return bookDetails;
     }
 
-    public void setBookDetail(BookDetailEntity bookDetail) {
-        this.bookDetails = bookDetail;
+    public void setBookDetails(BookDetailEntity bookDetails) {
+        this.bookDetails = bookDetails;
     }
+
     @Override
     public String toString(){
         return "BookEntity {"+
                 "id="+id +
                 ", name="+name+'\''+
                 ", author="+author+'\''+
-                ", category="+category+'\''+
-                ",bookDetail="+bookDetails +'}';
+                ", category name="+category.getName()+
+                ", ISBN="+bookDetails.getIsbn()+
+                ", Total page="+bookDetails.getNumberOfPage()+
+                ", price="+bookDetails.getPrice()+
+                ",Publish date="+bookDetails.getPublishDate() +'}';
     }
 }
