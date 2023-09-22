@@ -9,6 +9,8 @@ import mvc.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -53,6 +55,25 @@ public class BookController {
     @RequestMapping(value = "/newBook",method = RequestMethod.POST)
     public String saveBook(BookEntity book){
         bookRepository.save(book);
+        return "redirect:/";
+    }
+    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
+    public String showEditBooks(Model model,@PathVariable int id){
+        model.addAttribute("book",bookRepository.findById(id));
+        model.addAttribute("msg","Update a new book");
+        model.addAttribute("type","update");
+        model.addAttribute("action","/updateBook");
+        setCategoryDropDownlist(model);
+        return "book/book";
+    }
+    @RequestMapping(value = "/updateBook",method = RequestMethod.POST)
+    public String updateBook(@ModelAttribute BookEntity book){
+        bookRepository.save(book);
+        return "redirect:/";
+    }
+    @RequestMapping(value = "/delete/{id}",method = RequestMethod.GET)
+    public String deleteBooks(@PathVariable int id){
+       bookRepository.deleteById(id);
         return "redirect:/";
     }
 

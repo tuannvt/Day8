@@ -64,8 +64,8 @@
             <th>${book.bookDetails.price}</th>
             <th>${book.bookDetails.publishDate}</th>
             <th>${book.category.name}</th>
-            <th><button type="button" class="btn btn-dark">Edit</button>
-            <button type="button" class="btn btn-dark">Delete</button></th>
+            <th><button type="button" class="btn btn-dark" onclick="location.href='edit/${book.id}'">Edit</button>
+            <button type="button" class="btn btn-dark" onclick="location.href='delete/${book.id}'">Delete</button></th>
           </tr>
           </c:forEach>
         </tbody>
